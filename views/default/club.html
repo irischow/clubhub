@@ -1,0 +1,78 @@
+{{left_sidebar_enabled=False;right_sidebar_enabled=False}}
+{{extend 'layout.html'}}
+
+{{block head}}
+    <script>
+	$( window ).ready(function () {
+        {{if club.meeting_day:}}
+            $("#club_meeting_day option[value='{{=club.meeting_day[0]}}']").prop('selected', 'selected');
+        {{pass}}
+	});
+	</script>
+
+	<style>
+	    h1 { font-size: 18px; font-weight: bold; }
+	    h2 { font-size: 14px; font-weight: bold; }
+	</style>
+{{end}}
+
+<h1>{{=club.name}}</h1>
+
+<div class='container-fluid'>
+    <div class="row">
+    <div class='col-md-6'>
+        <h2>About Us</h2>
+        <p>{{=MARKMIN(club.description)}}</p>
+
+        <h2>Meetings</h2>
+        <p>{{if club.meeting_day:}}
+                {{=club.meeting_day[0]+'s '}}
+                <br />
+            {{pass}}
+            {{=club.meeting_time_place}}
+        </p>
+
+        <h2>Email: <a href='mailto:{{=club.email}}'>{{=club.email}}</a></h2>
+
+        <h2>Commitment Level: {{=club.commitment_level}}</h2>
+
+        <h2>Members</h2>
+        <form>
+        <table class='table table-borderless'>
+            {{for member in members:}}
+                <tr>
+                    <td>{{=member.auth_user.first_name+' '+member.auth_user.last_name}}</td>
+                    {{if member.club_member.president is True:}}
+                        <td>President</td>
+                    {{else:}}
+                        <td>
+                            {{if form:}}
+                                <input type = 'checkbox' name='check{{=member.club_member.member_id}}'/>
+                            {{pass}}
+                        </td>
+                    {{pass}}
+                </tr>
+            {{pass}}
+            {{if form:}}
+                <tr><td></td><td><input type="submit" class='btn btn-primary' name='cmd' value='Make President' /></td></tr>
+            {{pass}}
+        </table>
+        </form>
+    </div>
+
+    {{if club.photo:}}
+        <div class='col-md-6 visible-md-block visible-lg-block'>
+            <img width='100%' src="{{=URL('default', 'download', args=club.photo)}}" alt='club picture' />
+        </div>
+    {{pass}}
+    </div>
+
+    <div class="hidden-print row">
+        {{if form:}}
+            <div class='page-header'>Update Club <span class="small">(Admin and Club Presidents Only)</span></div>
+            <div class="well col-md-8">
+                {{=form}}
+            </div>
+        {{pass}}
+    </div>
+</div>

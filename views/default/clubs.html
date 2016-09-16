@@ -1,0 +1,28 @@
+{{left_sidebar_enabled=False;right_sidebar_enabled=False}}
+{{extend 'layout.html'}}
+
+<form method = 'post'>
+    <table class='table table-condensed'>
+        <tr><th /><th>Club</th></tr>
+
+        {{for club in clubs:}}
+            <tr>
+                {{if club.id not in belongs_to:}}
+                <td><input type = 'checkbox' name='check{{=club.id}}'/></td>
+                {{else:}}
+                <td />
+                {{pass}}
+                <td><a href={{=URL('default', 'club', args=club.id)}}>{{=club.name}}</a></td>
+            </tr>
+        {{pass}}
+        <tr><td></td><td><input type="submit" class='btn btn-primary' name='cmd' value='Join' /></td></tr>
+    </table>
+
+
+</form>
+
+
+{{if form:}}
+    <div class="page-header">Add Club <span class="small">(Admins Only)</span></div>
+	<div class="hidden-print well col-md-8">{{=form}}</div>
+{{pass}}

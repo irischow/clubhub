@@ -1,0 +1,90 @@
+{{left_sidebar_enabled=False;right_sidebar_enabled=False}}
+{{extend 'layout.html'}}
+
+{{block header}}
+    <!-- Carousel
+    ================================================== -->
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <div class="item active">
+          <img class="first-slide" src="{{=URL('static', 'images/wistem.jpg')}}" alt="First slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Club of the Month!</h1>
+              <p>WISTEM: We promote the involvement of women in science, technology, engineering, and mathematics.</p>
+              <p><a class="btn btn-lg btn-primary" href="clubs" role="button">Sign up today</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img class="second-slide" src="https://i.ytimg.com/vi/Wl2sDEpjqQI/maxresdefault.jpg" alt="Second slide"> <!--Picture of Sophia, Dory, and Robin -->
+          <div class="container">
+            <div class="carousel-caption">
+              <h1> Welcome to our website!</h1>
+
+              <p>We bring you important information about clubs at Miramonte.</p>
+              <p><a class="btn btn-lg btn-primary" href="about_us" role="button">Learn more</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img class="third-slide" src="http://www.partyexcuses.com/images/uploads/holidayimages/bigstock-Hands-giving-a-thumbs-up-okay-19276811.jpg" alt="Third slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Wanna be featured?</h1>
+              <p>Learn how to start a club and contact us in order to be featured as our club of the month!</p>
+              <p><a class="btn btn-lg btn-primary" href="contact_us" role="button">Contact Us</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div><!-- /.carousel -->
+{{end}}
+
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <br /><br /><br />
+
+
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+
+    <div class="container marketing">
+
+      <!-- Three columns of text below the carousel -->
+      <div class="row">
+        <div class="col-lg-4">
+          <img class="img-circle" src="http://diablomag-images.dashdigital.com/M6.jpg?ver=1346176116" alt="Generic placeholder image" width="140" height="140">
+          <h2>Miramonte High School</h2>
+            <p> The school and location of the clubs on our website.</p>
+          <p><a class="btn btn-default" href="http://www.acalanes.k12.ca.us/miramonte/" role="button">Miramonte Website &raquo;</a></p> <!--done -->
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4"> <!--link to the page of all clubs-->
+          <img class="img-circle" src="https://s-media-cache-ak0.pinimg.com/736x/9c/46/71/9c4671f0f3cde8e1ef69df06dd68033f.jpg" alt="Miramonte High School" width="140" height="140">
+          <h2>Overview of clubs</h2>
+          <p>A fabulous list of sample clubs, sorted alphabetically by name.</p>
+          <p><a class="btn btn-default" href="clubs" role="button">Clubs &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4"> <!--link to page about us -->
+          <img class="img-circle" src="http://etnconnect.com/wp-content/uploads/2014/12/a-new-beginning.jpg" alt="Generic placeholder image" width="140" height="140">
+          <h2>Website founding</h2>
+          <p>About us and the lovely website you are currently feasting your eyes upon.</p>
+          <p><a class="btn btn-default" href="about_us" role="button">About Us &raquo;</a></p>
+            <h1></h1>
+            <h1></h1>
+            <h1></h1>
+        </div><!-- /.col-lg-4 -->
+      </div><!-- /.row -->
