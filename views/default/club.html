@@ -35,18 +35,26 @@
         <h2>Email: <a href='mailto:{{=club.email}}'>{{=club.email}}</a></h2>
 
         <h2>Commitment Level: {{=club.commitment_level}}</h2>
-
-        <h2>Members</h2>
+        <br />
         <form>
         <table class='table table-borderless'>
+            <tr>
+                <th>Members</th>
+            {{if form:}}
+                <td>{{=A('Email all members', _class='btn btn-primary', _href='mailto:' + ','.join([member.auth_user.email for member in members]))}}</td>
+            {{pass}}
+            </tr>
             {{for member in members:}}
                 <tr>
                     <td>{{=member.auth_user.first_name+' '+member.auth_user.last_name}}</td>
+                    {{if form:}}
+                        <td>{{=A(member.auth_user.email, _href = 'mailto:' + member.auth_user.email)}}</td>
+                    {{pass}}
                     {{if member.club_member.president is True:}}
                         <td>President</td>
                     {{else:}}
                         <td>
-                            {{if form:}}
+                            {{if auth.has_membership('admin'):}}
                                 <input type = 'checkbox' name='check{{=member.club_member.member_id}}'/>
                             {{pass}}
                         </td>
@@ -54,7 +62,8 @@
                 </tr>
             {{pass}}
             {{if form:}}
-                <tr><td></td><td><input type="submit" class='btn btn-primary' name='cmd' value='Make President' /></td></tr>
+
+                <tr><td></td><td></td><td><input type="submit" class='btn btn-default' name='cmd' value='Make President' /></td></tr>
             {{pass}}
         </table>
         </form>
