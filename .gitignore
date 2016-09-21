@@ -18,7 +18,6 @@ sessions/*
 static/*.html
 static/css
 static/fonts
-static/images/background.jpg
 static/images/facebook.png
 static/images/gplus-32.png
 static/images/twitter.png
