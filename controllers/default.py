@@ -36,6 +36,21 @@ def clubs():
 	return dict(clubs=db(db.club).select(orderby=db.club.name), belongs_to=belongs_to, form=form)
 
 @auth.requires_login()
+def my_clubs():
+    sort = request.vars.get('sort', 'name')
+    if sort == 'day':
+        order = db.club.meeting_day
+    else:
+        order = db.club.name
+
+    clubs = db(db.club_member.member_id==auth.user).select(
+            db.club_member.ALL,
+            left = db.club.on(db.club.id == db.club_member.club),
+            orderby = order,
+    )
+    return dict(clubs = clubs, sort = sort)
+
+@auth.requires_login()
 def club():
     club_id = request.args(0)
 

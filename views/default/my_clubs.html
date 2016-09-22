@@ -1,0 +1,37 @@
+{{left_sidebar_enabled=False;right_sidebar_enabled=False}}
+{{extend 'layout.html'}}
+
+{{block head}}
+{{end}}
+
+<h1>My Clubs</h1>
+
+<table class='table table-condensed'>
+	<tr>
+	    <th>{{if sort == 'name':}}
+	            Club Name<span class="glyphicon glyphicon-triangle-top"></span>
+            {{else:}}
+                {{=A('Club Name', _href=URL('default', 'my_clubs', vars=dict(sort='name')))}}
+            {{pass}}
+	    </th>
+	    <th>{{if sort == 'day':}}
+	            Meeting Day<span class="glyphicon glyphicon-triangle-top"></span>
+            {{else:}}
+                {{=A('Meeting Day', _href=URL('default', 'my_clubs', vars=dict(sort='day')))}}
+            {{pass}}
+	    </th>
+	    <th>Time and Place</th>
+	</tr>
+
+	{{for club in clubs:}}
+		<tr>
+			<td>{{=A(club.club.name, _href=URL('default', 'club', args=club.club.id))}}</td>
+			<td>
+			    {{if club.club.meeting_day and club.club.meeting_day[0] != 'NA':}}
+			        {{=club.club.meeting_day[0]}}
+			    {{pass}}
+			</td>
+			<td>{{=club.club.meeting_time_place}}</td>
+		</tr>
+	{{pass}}
+</table>
