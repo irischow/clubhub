@@ -2,36 +2,73 @@
 {{extend 'layout.html'}}
 
 {{block head}}
+<script>
+    var show_all = true;
+
+    function show_hide() {
+        if (show_all) {
+            $("tr.not-member-of").hide();
+            $("#join").hide();
+            $("#toggle").text("All Clubs");
+        } else {
+            $("tr.not-member-of").show();
+             $("#join").show();
+           $("#toggle").text("My Clubs Only");
+        }
+        show_all = !show_all;
+    }
+</script>
 {{end}}
 
-<h1>My Clubs</h1>
+<h1>Clubs
+    <button id="toggle" class="btn btn-default pull-right" onclick="show_hide()">My Clubs Only</button>
+</h1>
 
-<table class='table table-condensed'>
-	<tr>
-	    <th>{{if sort == 'name':}}
-	            Club Name<span class="glyphicon glyphicon-triangle-top"></span>
-            {{else:}}
-                {{=A('Club Name', _href=URL('default', 'my_clubs', vars=dict(sort='name')))}}
-            {{pass}}
-	    </th>
-	    <th>{{if sort == 'day':}}
-	            Meeting Day<span class="glyphicon glyphicon-triangle-top"></span>
-            {{else:}}
-                {{=A('Meeting Day', _href=URL('default', 'my_clubs', vars=dict(sort='day')))}}
-            {{pass}}
-	    </th>
-	    <th>Time and Place</th>
-	</tr>
-
-	{{for club in clubs:}}
-		<tr>
-			<td>{{=A(club.club.name, _href=URL('default', 'club', args=club.club.id))}}</td>
-			<td>
-			    {{if club.club.meeting_day and club.club.meeting_day[0] != 'NA':}}
-			        {{=club.club.meeting_day[0]}}
-			    {{pass}}
-			</td>
-			<td>{{=club.club.meeting_time_place}}</td>
+<form method = 'post'>
+	<table class='table table-condensed'>
+		<tr><th />
+			<th>{{if sort == 'name':}}
+					Club Name<span class="glyphicon glyphicon-triangle-top"></span>
+				{{else:}}
+					{{=A('Club Name', _href=URL('default', 'my_clubs', vars=dict(sort='name')))}}
+				{{pass}}
+			</th>
+			<th>{{if sort == 'day':}}
+					Meeting Day<span class="glyphicon glyphicon-triangle-top"></span>
+				{{else:}}
+					{{=A('Meeting Day', _href=URL('default', 'my_clubs', vars=dict(sort='day')))}}
+				{{pass}}
+			</th>
+			<th>Time and Place</th>
 		</tr>
-	{{pass}}
-</table>
+
+		{{for c in clubs:}}
+			{{club = c.club}}
+				{{if club.id not in belongs_to:}}
+			        <tr class="not-member-of">
+					    <td><input type = 'checkbox' name='check{{=club.id}}'/></td>
+				{{else:}}
+			        <tr><td />
+				{{pass}}
+
+				<td>{{=A(club.name, _href=URL('default', 'club', args=club.id))}}</td>
+				<td>
+					{{if club.meeting_day and club.meeting_day[0] != 'NA':}}
+						{{=club.meeting_day[0]}}
+					{{pass}}
+				</td>
+				<td>{{=club.meeting_time_place}}</td>
+			</tr>
+		{{pass}}
+        <tr><td></td>
+            <td><input type="submit" class='btn btn-primary' id='join' name='cmd' value='Join' /></td>
+            <td />
+            <td />
+        </tr>
+	</table>
+</form>
+
+{{if form:}}
+    <div class="page-header">Add Club <span class="small">(Admins Only)</span></div>
+	<div class="hidden-print well col-md-8">{{=form}}</div>
+{{pass}}
