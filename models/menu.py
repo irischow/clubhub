@@ -39,7 +39,7 @@ if auth.has_membership('admin', auth.user_id):
 	response.menu += [(T('Admin'), False, None, [
         ('Add Member', False, URL('default', 'add_member')),
         ('Select Club-of-the-month', False, None),
-        ('Edit Database', False, URL('appadmin', 'index')),
+        ('Edit Database', False, URL('appadmin', 'index', scheme="https")),
 	])]
 
 DEVELOPMENT_MENU = False
