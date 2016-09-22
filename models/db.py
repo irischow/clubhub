@@ -146,6 +146,11 @@ db.define_table('club_member',
     Field('president', 'boolean'),
 )
 
+db.define_table('day_number',
+    Field('day_name', 'string'),
+    Field('day_number', 'integer'),
+)
+
 # -------------------------------------------------------------------------
 # after defining tables, uncomment below to enable auditing
 # -------------------------------------------------------------------------

@@ -39,13 +39,14 @@ def clubs():
 def my_clubs():
     sort = request.vars.get('sort', 'name')
     if sort == 'day':
-        order = db.club.meeting_day
+        order = db.day_number.day_number | db.club.name
     else:
         order = db.club.name
 
     clubs = db(db.club_member.member_id==auth.user).select(
             db.club_member.ALL,
-            left = db.club.on(db.club.id == db.club_member.club),
+            left = [db.club.on(db.club.id == db.club_member.club),
+                    db.day_number.on(db.day_number.day_name == db.club.meeting_day)],
             orderby = order,
     )
     return dict(clubs = clubs, sort = sort)
