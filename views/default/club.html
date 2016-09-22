@@ -25,7 +25,7 @@
         <p>{{=MARKMIN(club.description)}}</p>
 
         <h2>Meetings</h2>
-        <p>{{if club.meeting_day:}}
+        <p>{{if club.meeting_day and club.meeting_day[0] != 'NA':}}
                 {{=club.meeting_day[0]+'s '}}
                 <br />
             {{pass}}
@@ -41,7 +41,7 @@
             <tr>
                 <th>Members</th>
             {{if form:}}
-                <td>{{=A('Email all members', _class='btn btn-primary', _href='mailto:' + ','.join([member.auth_user.email for member in members]))}}</td>
+                <td>{{=A('Email all members', _class='btn btn-primary btn-small', _href='mailto:' + ','.join([member.auth_user.email for member in members]))}}</td>
             {{pass}}
             </tr>
             {{for member in members:}}
