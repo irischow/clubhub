@@ -132,9 +132,9 @@ valid_length.error_message = 'Max image size is 0.5 mb.'
 db.define_table('club',
     Field('name', length=128, notnull=True),
     Field('description', 'text', comment='Can use markmin markups.'),
-    Field('email', requires=IS_EMAIL(), label="Club eMail"),
-    Field('commitment_level', 'integer', requires=IS_INT_IN_RANGE(1, 6)),
-    Field('meeting_day', 'list:string', requires=IS_IN_SET(('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'))),
+    Field('email', label="Club eMail"),     # requires=IS_EMAIL()
+    Field('commitment_level', 'integer'),   # requires=IS_INT_IN_RANGE(1, 6)
+    Field('meeting_day', 'list:string', requires=IS_IN_SET(('NA', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'))),
     Field('meeting_time_place', 'string'),
     Field('photo', 'upload', requires=valid_length, comment='Photo can be jpg, png or gif.'),
     Field('club_of_the_month', 'boolean', writable=False),
